@@ -1,0 +1,190 @@
+#page-desktop{ position: static}
+#body_div{ background: #FFFFFF}
+.main-section{ background: #222d32}
+.page-head{ position: static}
+.page-content{ margin-top:0}
+header .container{ width:100%; padding:0px 15px 0 0; min-height: 50px;}
+.navbar-brand{ padding: 0 15px 0 15px; line-height: 50px; height: 50px;}
+#navbar-breadcrumbs > li > a{ padding: 11px 15px 15px 0px}
+/*ul#navbar-breadcrumbs {
+    display: none;
+}*/
+
+#navbar-search , .navbar-search-icon {
+	display: none;
+}
+.navbar-form{ margin-top:10px;}
+.navbar .dropdown-toggle{padding:13px 15px}
+/*header .dropdown-help{display:none}*/
+/*RG-Pa quitar el contenido del help*/
+.dropdown-help .dropdown-menu .input-group {display: none;}
+li#help-links {display: none;}
+/*RG- Pa borrar las notificaciones (que no se vean)*/
+.navbar-new-comments-true {    display: none;}
+
+.main-header .sidebar-toggle{text-decoration: none;}
+.page-container{margin-top:0;}
+/*
+.navbar-brand{height: 50px; line-height: 30px}
+.main-header .logo { height: 40px}
+.main-header .sidebar-toggle{ line-height: 40px;}
+.main-header .navbar{min-height: 40px;}
+*/
+#page-desktop{ background-color:#FFFFFF !important}
+
+/*RG - COLOR DEL NAVBAR*/
+.skin-blue .main-header .navbar {
+    background-color: #5e64ff; /*rosa ciai*/
+}
+.main-header .logo .logo-lg{
+    background: #FFFFFF url(/assets/ciai/images/logo-200x78.png) center no-repeat;
+    background-size: auto 48px;
+    text-indent:-99em;
+}
+.main-header .logo .logo-mini{
+    background: #FFFFFF url(/assets/ciai/images/ico-32.png) center no-repeat;
+    background-size: auto 38px;
+    text-indent:-99em;
+}
+.skin-blue .main-header .logo {
+    background-color: #ffffff;
+    border-bottom: 0 solid transparent;
+}
+
+.skin-blue .main-sidebar .sidebar-menu > li:hover > a,
+.skin-blue .main-sidebar .sidebar-menu > li.active > a {
+    border-left: #5e64ff solid 5px; /*rosa ciai*/
+}
+
+.skin-blue.layout-top-nav .main-header > .logo {
+  background-color: #5e64ff; /*rosa ciai*/
+  color: #ffffff;
+  border-bottom: 0 solid transparent;
+}
+.skin-blue.layout-top-nav .main-header > .logo:hover {
+  background-color: #5e64ff; /*rosa ciai*/
+}
+
+
+.layout-side-section{ font-size: 13px;}
+.case-label{ color:#000; text-shadow:none; font-size: 95%; font-weight:normal}
+h6.uppercase, .h6.uppercase{ color: #666666;}
+.control-label, .grid-heading-row{ color: #666666;}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #FFFFFF;
+}
+
+
+a.navbar-brand.navbar-home.hidden-xs.hidden-sm {
+    display: none;
+}
+
+.navbar-header.navbar-desk {
+    display: none;
+}
+/*pa borrar los filtros en movil*/
+@media (max-width: 991px) {
+	.page-form.row, .show_filters {
+		display: none;
+	}
+
+}
+
+
+/*customizacion de sidebar forms*/
+.page-body {
+	width: 99%;
+}
+.page-head .container
+{
+	width: 99%;
+}
+.sidebar-comments, .assigned-to-label, .form-assignments , .tags-label, .form-tags,
+.shared-with-label, .form-shared, .liked-by-parent, .modified-by,.created-by,
+a.strong.sidebar-comments.badge-hover, .sidebar-menu p
+ {
+	display: none;
+}
+li.attachment-row {
+    border-bottom: 1px solid #dadfe3;
+    padding: 3px;
+    margin-bottom: 20px;
+}
+.has-attachments{
+    color: #5e64ff;
+ }
+.add-attachment {
+	border: 1px solid #5e64ff91;
+    padding: 5px 20px 5px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+span.visible-xs.visible-sm.standard-image{
+	background: #FFFFFF url(/assets/drleon/images/help32.png) center no-repeat;
+/*	font-weight: 700;
+    color: #5e64ff;
+    border: 1px solid #5e64ff;*/
+
+}
+ul.list-unstyled.sidebar-menu.form-attachments {
+    border: 1px solid #ebeff2;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 3px #f0f4f7;
+}
+
+/*customizacion de list view*/
+.list-link, .assigned-to-me, .sidebar-stat, .list-tag-preview, .help-link {
+	display: none;
+}
+.standard-actions li .btn-group {
+    border: 1px solid #5e64ff91;
+    padding: 5px 20px 5px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+/*RG- Customizacion de checkboxes*/
+/*input[type="checkbox"]:before {
+    font-size: 18px;
+    color: #f46496;
+}*/
+
+input[type="checkbox"]:checked:before {
+    content: '\f14a';
+    font-size: 18px;
+    color: #5e64ff;
+}
+
+body {
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, "Open Sans", sans-serif;
+    font-size: 18px;
+}
+
+.no-result{
+    background: #FFFFFF url(/assets/ciai/images/robot1.svg) center no-repeat;
+    background-size: auto 150px;
+    background-position-y: 10%;
+}
+
+.ayudachico {
+    margin-left: 10px;
+    color: #5e64ff;
+    border: none;
+    background-color: rgba(255, 255, 255, .9);
+    padding: 0;
+}
+
+.ayudagrande {
+    color: #5e64ff;
+    border: #5e64ff solid 1px;
+    background-color: rgba(255, 255, 255, .9);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+
+.frappe-control .help-box {
+    font-size: 70%;
+}

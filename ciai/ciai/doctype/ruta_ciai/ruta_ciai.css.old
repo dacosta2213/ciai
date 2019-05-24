@@ -1,0 +1,39 @@
+.chart-container>.title {
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    color: #36414c;
+}
+
+.chart-container .graphics {
+    border: #eee solid 1px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 50px;
+    padding-top: 30px;
+}
+
+.chart-container .axis line, .chart-container .chart-label line {
+    stroke-opacity: .1;
+}
+
+.chart-container .axis .specific-value line, .chart-container .chart-label .specific-value line {
+    stroke-opacity: 1;
+    color: red;
+}
+
+.chart-container .axis .specific-value text, .chart-container .chart-label .specific-value text {
+    color: red;
+}
+
+.links-dashboard {
+    border: #eee solid 1px;
+    height: auto;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+/* .page-head {
+    display: none;
+} */

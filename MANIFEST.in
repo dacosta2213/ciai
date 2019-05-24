@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ciai *.css
+recursive-include ciai *.csv
+recursive-include ciai *.html
+recursive-include ciai *.ico
+recursive-include ciai *.js
+recursive-include ciai *.json
+recursive-include ciai *.md
+recursive-include ciai *.png
+recursive-include ciai *.py
+recursive-include ciai *.svg
+recursive-include ciai *.txt
+recursive-exclude ciai *.pyc

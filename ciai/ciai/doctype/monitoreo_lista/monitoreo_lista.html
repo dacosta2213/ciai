@@ -1,0 +1,25 @@
+<h3>Lecturas Fuera de Rango:</h3>
+<style>
+
+</style>
+	<table class="table table-bordered assessment-result-tool">
+    <thead>
+  		<tr>
+  			<th>ID</th>
+  			<th>Hora</th>
+  			<th>Temperatura</th>
+  			<th>Bateria</th>
+  			<th>Estatus</th>
+  		</tr>
+  	<tbody>
+  		{% for l in lecturas %}
+      <tr>
+        <td><a href="#Form/Lectura/{{ l.name }}">{{ l.name }}</a></td>
+        <td>{{ l.creation }}</td>
+        <td>{{ l.field1 }}</td>
+        <td>{{ l.bat }}</td>
+        <td>{{ l.estatus }}</td>
+      </tr>
+      {% endfor %}
+  	</tbody>
+</table>
