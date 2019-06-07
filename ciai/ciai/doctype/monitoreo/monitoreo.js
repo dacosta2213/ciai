@@ -17,6 +17,9 @@ var estaciones = function(frm){
 	var est
 	frappe.call({
 		method: "ciai.api.get_estaciones_estatus",
+		args: {
+			user: frappe.user.name
+		},
 		callback: function (data) {
 			// console.log(data.message)
 			est = data.message

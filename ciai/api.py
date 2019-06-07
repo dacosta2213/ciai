@@ -24,8 +24,9 @@ def ruta(login_manager):
 
 @frappe.whitelist(allow_guest=True)
 # Para GoogleMaps (lo mando llamar desde doctype MONITOREO). Carga las estaciones registradas y genera el archivo para el mapa
-def get_estaciones_estatus():
-    estaciones = frappe.get_all('Estacion', fields=['nombre','estatus','ciclo','lat','lng','color'])
+def get_estaciones_estatus(user):
+    frappe.errprint(user)
+    estaciones = frappe.get_all('Estacion', filters={'user': user}, fields=['nombre','estatus','ciclo','lat','lng','color'])
     return estaciones
 
 @frappe.whitelist(allow_guest=True)
@@ -41,7 +42,7 @@ def get_lect_todas(ciclo):
 
 @frappe.whitelist()
 def get_lect(estacion):
-    lecturas = frappe.get_list('Lectura', filters={'estacion': estacion}, fields=['estatus','name','estacion','creation','field1','bat'],limit_page_length=10)
+    lecturas = frappe.get_list('Lectura', filters={'estacion': estacion}, fields=['estatus','name','estacion','creation','field1','field2','bat'],limit_page_length=10)
     return lecturas
 
 @frappe.whitelist()
@@ -74,7 +75,7 @@ def validar_cert(id,secret,ciclo):
 
 
 @frappe.whitelist(allow_guest=True)
-def addlectura(apikey=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat=0,lng=0,bat=0):
+def addlectura(apikey=None,dateytime=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat=0,lng=0,bat=0):
     """Agregar Lectura"""
 
     ciclo = frappe.db.get_value("Estacion", estacion ,"ciclo")
@@ -98,7 +99,7 @@ def addlectura(apikey=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat
     cadena_ciclo = " STATUS: " + ciclo_estatus + " LAT: " + str(latitud) + " LNG: " + str(longitud) + " TEMPERATURA INICIO: " + str(temp_inicio) + "MAX: " + str(max) + "MIN: " + str(min) + " HORASMONITOREO: " + str(horas) + " HORA INICIO: " + hora_inicio_str  + " HORA FIN: " + hora_final_str
 
 
-    if int(field1) < min or int(field1) > max:
+    if float(field1) < float(min) or float(field1) > float(max):
         estatus_lectura="Fuera de Rango"
 
     # RG-Tomar lectura y generar registro en tabLectura
@@ -117,15 +118,15 @@ def addlectura(apikey=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
 
-    # Para registrar 1RA LECTURA (cuando encienden la maquina) pasar de Inactivo a Preactivado
+    # Para registrar 1RA LECTURA (cuando encienden el sensor) pasar de Inactivo a Preactivado
     if ciclo_estatus == "Inactivo":
         frappe.db.sql("UPDATE tabCiclo  SET estatus = 'Preactivado' WHERE name = %s", (ciclo) )
         frappe.db.sql("UPDATE tabCiclo  SET primera_lectura = %s WHERE name = %s", (now, ciclo) )
-        frappe.db.sql("UPDATE tabEstacion  SET estatus = 'Prendida' , color = 'green' WHERE name = %s", (estacion) )
+        frappe.db.sql("UPDATE tabEstacion  SET estatus = 'Prendida' , color = 'green',lng=%s , lat=%s WHERE name =%s", (lng,lat,estacion) )
         frappe.db.commit()
-        enviar_alerta(ciclo,estacion,msg="Se registra 1ra Lectura.")
+        enviar_alerta(ciclo,estacion,msg="Se registra 1ra Lectura en Sensor.")
 
-    # Temperatura alcanzada.Para Iniciar la medicion de las 72 horas y pasar de  Preactivado a Activo
+    # Temperatura ideal es alcanzada.Para Iniciar la medicion de las XX horas y pasar de  Preactivado a Activo
     if field1 == temp_inicio and ciclo_estatus == "Preactivado":
         frappe.db.sql("UPDATE tabCiclo  SET estatus='Activo' WHERE name = %s", (ciclo) )
         frappe.db.sql("UPDATE tabCiclo  SET inicio = %s WHERE name = %s", (now, ciclo) )
@@ -134,7 +135,7 @@ def addlectura(apikey=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat
         enviar_alerta(ciclo,estacion,msg="Temperatura de inicio alcanzada. Comienza monitoreo de 72 horas.")
 
     # Para alertar si la temperatura rebasa lo definido en el perfil de la especie
-    if (int(field1) < min or int(field1) > max) and ciclo_estatus == "Activo":
+    if (float(field1) < float(min) or float(field1) > float(max) ) and ciclo_estatus == "Activo":
         frappe.db.sql("UPDATE tabCiclo  SET estatus='Truncado' WHERE name = %s", (ciclo))
         frappe.db.sql("UPDATE tabCiclo  SET final = %s WHERE name = %s", (now, ciclo) )
         frappe.db.sql("UPDATE tabEstacion  SET estatus = 'Fuera de Rango', color = 'yellow' WHERE name = %s", (estacion) )
@@ -155,13 +156,12 @@ def addlectura(apikey=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat
     if float(lat) != float(latitud) or float(lng) != float(longitud) :
         enviar_alerta(ciclo,estacion,msg="La estacion se movio de Lugar")
 
-    # frappe.errprint("Hora Actual: " + str(datetime.now()) + ' Hora Final: '+ str(hora_final))
     return('Lectura Registrada. Max:' + str(max) + ' Min: ' + str(min) + ' Status: ' + estatus_lectura)
 
 
 def enviar_alerta(ciclo,estacion,msg):
     c = frappe.get_doc("Ciclo", ciclo)
-    frappe.sendmail(['admin@codigo-binario.com',"{0}".format(c.notificar)], \
+    frappe.sendmail(['soporte@totall.mx',"{0}".format(c.notificar)], \
     subject=ciclo + " de Estacion: " + estacion , \
     content=msg,delayed=False)
 
