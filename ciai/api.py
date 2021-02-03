@@ -37,12 +37,12 @@ def acuerdo(ciclo):
 
 @frappe.whitelist(allow_guest=True)
 def get_lect_todas(ciclo):
-    lecturas = frappe.db.sql("select estatus,estacion,creation,field1 from `tabLectura` where ciclo=%s", (ciclo), as_dict=1)
+    lecturas = frappe.db.sql("select estatus,estacion,creation,field1,dateytime from `tabLectura` where ciclo=%s", (ciclo), as_dict=1)
     return lecturas
 
 @frappe.whitelist()
 def get_lect(estacion):
-    lecturas = frappe.get_list('Lectura', filters={'estacion': estacion}, fields=['estatus','name','estacion','creation','field1','field2','bat'],limit_page_length=10)
+    lecturas = frappe.get_list('Lectura', filters={'estacion': estacion}, fields=['estatus','name','estacion','creation','field1','field2','bat','dateytime'],limit_page_length=10)
     return lecturas
 
 @frappe.whitelist()
@@ -78,6 +78,7 @@ def validar_cert(id,secret,ciclo):
 def addlectura(apikey=None,dateytime=None,estacion=None,field1=0,field2=0,field3=0,field4=0,lat=0,lng=0,bat=0):
     """Agregar Lectura"""
 
+    # dateytime = datetime
     ciclo = frappe.db.get_value("Estacion", estacion ,"ciclo")
     ciclo_estatus = frappe.db.get_value("Ciclo", ciclo ,"estatus")
     latitud = frappe.db.get_value("Estacion", estacion ,"lat")
@@ -106,6 +107,7 @@ def addlectura(apikey=None,dateytime=None,estacion=None,field1=0,field2=0,field3
     doc = frappe.get_doc({
     "doctype": "Lectura",
     "estacion": estacion,
+    "dateytime": dateytime,
     "lat": lat,
     "estatus": estatus_lectura,
     "lng": lng,

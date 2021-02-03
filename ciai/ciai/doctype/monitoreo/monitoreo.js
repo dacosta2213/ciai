@@ -59,7 +59,7 @@ var setMarkers = function(map,est){
 					},
 					callback: function(r) {
 						// frm.events.get_marks(frm, r.message);
-						console.log(r.message)
+						console.log('get_lect:: ', r.message)
 						var result_table = $(frappe.render_template('lecturas', {
 							lecturas: r.message
 						}) )

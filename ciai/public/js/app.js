@@ -20,7 +20,6 @@ $(document).ready(function() {
 	$("[href='https://gitter.im/frappe/erpnext']").hide();
 	$("[href='#background_jobs']").hide();
 	$("[href='https://github.com/frappe/erpnext/issues']").hide();
-	$("[onclick='return frappe.ui.toolbar.show_about();']").hide()
 	$("[rel='noopener noreferrer']").hide();
 
 	// RG- Borrar el icono de explore
@@ -59,16 +58,7 @@ frappe.templates["logo"] = '<div data-toggle="offcanvas" role="button">'
 
 frappe.templates["sidebar-toggle"] = '';
 
-frappe.templates["ayuda"] = '<li><a></a></li>'
-+'<li class="divider documentation-links"></li>'
-// +'<li><a href="https://www.youtube.com/playlist?list=PLnzRJvOjHWWI7DgtvB1t5Xxa2J3n1Zwcv" target="_blank">Videos de Ayuda</a></li>'
-+'<li><a href="http://Totall.mx">Enviar Mail a Soporte</a></li>'
-+'<li><a href="http://Totall.mx" target="_blank">Abrir Ticket de Soporte</a></li>'
-+ '<li class="divider documentation-links"></li>'
-// + '<li><a href="https://api.whatsapp.com/send?phone=526868411224&text=Necesito%20ayuda!" target="_blank">Ayuda por WhatsApp</a></li>'
-// +'<li><a href="https://appear.in/posix" target="_blank">Soporte Remoto (Usar Chrome)</a></li>'
-+ '<li class="divider documentation-links"></li>'
-+'<li><a href="http://Totall.mx">Desarrollado por Totall.MX</a><a>Horario de Soporte de 8 AM a 5 PM</a></li>';
+frappe.templates["ayuda"] = '<li><a></a></li>';
 
 
 // if (frappe.user.has_role('Supplier')) {
@@ -162,10 +152,13 @@ frappe.templates["xerp"] = '<aside class="main-sidebar">'
  +'            </span>'
  +'          </a>'
  +'          <ul class="treeview-menu">'
- +'            <li><a href="#List/CFDI/List"><i class="far fa-money-bill-alt"></i>   Facturas</a></li>'
- +'            <li><a href="#List/CFDI Clave Producto/List"><i class="octicon octicon-plus"></i> Clave Producto</a></li>'
+ +'           <li><a href="#List/Sales%20Invoice/List"><i class="far fa-money-bill-alt"></i>   Facturas</a></li>'
+ +'            <li><a href="#List/Payment%20Entry/List"><i class="far fa-money-bill-alt"></i>   Pagos</a></li>'
+ +'            <li><a href="#List/CFDI%20Nota%20de%20Credito/List"><i class="far fa-money-bill-alt"></i>   Nota de credito</a></li>'
+ +'            <li><a href="#List/Item/item_group=Productos"><i class="octicon octicon-package"></i>  Productos</a></li>'
+ +'            <li><a href="#List/CFDI Clave Producto/List"><i class="fas fa-money-check-alt"></i> Clave Producto</a></li>'
  +'            <li><a href="#List/CFDI Clave Unidad/List"><i class="fas fa-plus-circle"></i>  Clave Unidad</a></li>'
-	+'            <li><a href="#List/Configuracion CFDI/List"><i class="fa fa-cog"></i>  Configurar</a></li>'
+ +'            <li><a href="#Form/Configuracion CFDI/Cliente"><i class="fa fa-cog"></i>  Configurar</a></li>'
  +'          </ul>'
  +'        </li>'
 

@@ -7,7 +7,8 @@
 	<thead>
 		<tr>
 			<th>ID</th>
-			<th>Hora</th>
+			<th>Hora Registrada</th>
+			<th>Hora del Sensor</th>
 			<th>Estacion</th>
 			<th>Temperatura</th>
 			<th>Bateria</th>
@@ -18,6 +19,7 @@
     <tr>
       <td><a href="#Form/Lectura/{{ l.name }}">{{ l.name }}</a></td>
       <td>{{ l.creation }}</td>
+      <td>{{ l.dateytime }}</td>
       <td>{{ l.estacion }}</td>
       <td>{{ l.field1 }}</td>
       <td>{{ l.bat }}</td>
